@@ -23,8 +23,6 @@
           <div class="page" :is="page" @change-page="onChangePage"></div>
       </transition>
      </div>
-
-     
     <script id="start" type="text/x-template">
         <div class="start">
             <div class="inner">
@@ -78,11 +76,13 @@
                           </h2>
                           
                           <button button class="button signup enter-4  button-start" type="button" @click="$emit('change-page', 'next')">
-                              JOIN THE WAITLIST
+                              SIGNUP FOR UPDATES
                           </button>
                       </div>
               
                   </section>
+
+                  <div class = "footer-text"> Have Questions? <a href = "mailto:krishnerkar@gmail.com"  rel="noopener noreferrer" target="_blank" style = "color: #BDB6B6 ; z-index:100">Email Me</a> Or  <a href = "https://twitter.com/nerkar_krish"  rel="noopener noreferrer" target="_blank" style = "color : #BDB6B6 ; z-index:100">Message Me</a></div>
 
             </div>
         </div>
@@ -93,17 +93,17 @@
               <div class="center">
                 <div class="form">
                 <h1 class = "form-head enter-1">
-                Join The Waitlist 
+                Signup For Weekly Updates 
                 </h1>
                 <form id = "detail-form">
                   <input type="text" class = "enter-2" id = "name" placeholder="Enter Your Name">
                   <br>
                   <input type="email" class = "enter-3" id = "email" placeholder="Enter Your Email Address">
                   <br>
-                  <input type="checkbox" class = "enter-4" id = "check" checked="checked"> <span class="container enter-4">GET A PROGRESS UPDATE EACH SATURDAY (we promise to not spam)</span>        
+                  <input type="checkbox" class = "enter-4" id = "check" checked="checked"> <span class="container enter-4">GET NOTIFIED WHEN THE BETA RELEASE IS AVAILABLE</span>        
                   <br>
                 </form>
-                <button type="button" id = "btn" class = "enter-4" @click = "$emit('change-page', 'start')" onclick = "submitForm()" >Join</button>
+                <button type="button" id = "btn" class = "enter-4" @click = "$emit('change-page', 'start')" onclick = "submitForm()" >Signup</button>
               </div>       
             </div>
               <div class="button-wrapper enter-1">

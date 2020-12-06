@@ -11,6 +11,15 @@
   overflow: hidden;
 }
 
+.footer-text {
+  font-size: 1vw;
+  font-family: 'DM Sans', sans-serif;
+  margin-left: 5vw;
+  position: absolute;
+  margin-top: 95vh;
+  color: #BDB6B6;
+}
+
 .header {
   font-family: 'DM Sans', sans-serif;
   color: #ffffff;
@@ -569,6 +578,9 @@
   .form-head {
     font-size: 5vw;
   }
+  .footer-text {
+    font-size: 2vw;
+  }
   #detail-form input[type=text] {
     width: 70%;
     font-size: 2vw;
@@ -603,6 +615,9 @@
 @media only screen and (max-width: 640px) {
   .header, .highlight {
     font-size: 8vw;
+  }
+  .footer-text {
+    font-size: 2.7vw;
   }
   .sub-head {
     font-size: 3.5vw;
