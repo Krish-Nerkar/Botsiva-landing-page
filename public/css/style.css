@@ -244,6 +244,16 @@
   position: relative;
 }
 
+.footer-text {
+  color: #BDB6B6;
+  z-index: 1000;
+}
+
+.footer-text p {
+  color: #1593C7;
+  background-color: #1593C7;
+}
+
 /* Transition
  -----------------------------*/
 .page-enter-active {
