@@ -38,21 +38,6 @@ $textsize : 4vw;
     margin-top: 1em;
 }
 
-.signudp{
-    font-family: 'DM Mono', monospace;
-    color: #ffffff;
-    font-size: 1.2vw;
-    background: linear-gradient(90deg,  $accentdark 80%,$accentlight 100%);
-    border: none;
-    width: auto;
-    height: auto;
-    padding: 1.2em;
-    border-radius: 1.2vw;
-    margin-top: 3em;
-    border-color: $accentdark;
-    border: solid $accentdark;
-}
-
 .signup:hover{
     background: none;
 }
@@ -178,8 +163,8 @@ $textsize : 4vw;
 }
 .button {
     position: relative;
-    height: 60px;
-    width: 300px;
+    // height: 60px;
+    // width: 300px;
     background-color: transparent;
     border: 3px solid #fff;
     color: #fff;
@@ -344,6 +329,8 @@ $textsize : 4vw;
     margin-top: 2em;
     height: 4vw;
     width: 10vw;
+    // height: auto;
+    // width: auto;
     border-color: $accentdark;
     border: solid $accentdark;
     
@@ -398,3 +385,139 @@ $textsize : 4vw;
     margin: auto;
 }
  
+
+  //tablet screens
+  @media only screen and (min-width: 600px) and (max-width : 1000px) {
+    .logo{
+      width: 30vw;
+    }
+
+    .header, .highlight{
+      font-size: 6vw;
+    }
+
+    .sub-head{
+      font-size: 2.5vw;
+    }
+
+    .button{
+     font-size: 1.8vw;
+    }
+
+    .form-head{
+      font-size: 5vw;
+    }
+
+    #detail-form{
+      input[type=text]{
+        width: 70%;
+        font-size: 2vw;
+        padding: 2vw 4vw;
+      }
+
+      input[type=email]{
+        width: 70%;
+        font-size: 2vw;
+        padding: 2vw 4vw;
+      }
+
+      input[type=checkbox]{
+        width: 2vw;
+        height: 2vw;
+        padding: 0;
+        margin: 0;
+        margin-top: 2em;
+        margin-right: 0.4em;
+      }
+    }
+
+    .container{
+      width: 100vw;
+      font-size: 2vw;
+      line-height: 1px;
+    }
+
+    #btn{
+      font-size: 2vw;
+      padding: 1em;
+      height: auto;
+      width: auto;
+    }
+
+  }
+
+  //mobile screens
+  @media only screen and (max-width: 640px) {
+    .header, .highlight{
+      font-size: 8vw;
+    }
+
+    .sub-head{
+      font-size: 3.5vw;
+      line-height: 5vw;
+    }
+
+    .big-circle{
+      width: 80vw;
+      height: 80vw;
+    }
+
+    .logo{
+      width: 30vw
+    }
+
+    .button{
+      font-size: 2.5vw;
+      letter-spacing: 2px;
+    }
+
+    .form-head{
+      font-size: 8vw;
+    }
+
+    #detail-form{
+      input[type=text]{
+        width: 100%;
+        font-size: 3vw;
+        padding: 3vw 5vw;
+      }
+
+      input[type=email]{
+        width: 100%;
+        font-size:3vw;
+        padding: 3vw 5vw;
+      }
+
+      input[type=checkbox]{
+        // width: 100%;
+        width: 3vw;
+        height: 3vw;
+        padding: 0;
+        margin: 0;
+        margin-top: 2em;
+        margin-right: 0.4em;
+      }
+    }
+
+    .container{
+      width: 100vw;
+      font-size: 2.7vw;
+      line-height: 1px;
+    }
+
+    .button-next{
+      border: none;
+  
+      svg{
+          width: 15vw;
+          height: 10vw;
+      }
+  }
+
+    #btn{
+      font-size: 3vw;
+      padding: 1em;
+      height: auto;
+      width: auto;
+    }
+  }
