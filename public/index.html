@@ -1,89 +1,197 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/8.1.2/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/8.1.2/firebase-auth.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-database.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-firestore.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-functions.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-storage.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.1.2/firebase-performance.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botsiva</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
+<body>
+    <div id="app">
+      <transition name="page" :duration="1300">
+          <div class="page" :is="page" @change-page="onChangePage"></div>
+      </transition>
+     </div>
+    <script id="start" type="text/x-template">
+        <div class="start">
+            <div class="inner">
+              <div class="big-circles">
+                <div class="big-circle"></div>
+                <div class="big-circle"></div>
+                <div class="big-circle"></div>
+              </div>
+              <div class="smallcircles">
+                <div class="small-circle"></div>
+                <div class="small-circle"></div>
+                <div class="small-circle"></div>
+                <div class="small-circle"></div>
+                <div class="small-circle"></div>
+                <div class="small-circle"></div>
+              </div>
+                  <section class="hero">
+                      <svg class="logo enter-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 272.625 41.642">
+                          <defs>
+                          <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+                              <stop offset="0" stop-color="#1593c7"/>
+                              <stop offset="1" stop-color="#30bedd"/>
+                          </linearGradient>
+                          </defs>
+                          <g id="logo" transform="translate(9.867 -917.881)">
+                          <g id="logo-center" transform="translate(53.883 917.881)">
+                              <g id="title" transform="translate(0)">
+                              <path id="path187824" d="M866.1-99.689a14.972,14.972,0,0,0-10.485,4.331v-11.169a2.4,2.4,0,0,0-2.393-2.336,2.385,2.385,0,0,0-2.336,2.336v35.217a2.385,2.385,0,0,0,2.336,2.336,2.4,2.4,0,0,0,2.393-2.336v-1.425A14.972,14.972,0,0,0,866.1-68.4a15.447,15.447,0,0,0,15.215-15.614A15.46,15.46,0,0,0,866.1-99.689Zm0,26.555a10.731,10.731,0,0,1-10.485-10.884A10.745,10.745,0,0,1,866.1-94.96a10.708,10.708,0,0,1,10.485,10.941A10.694,10.694,0,0,1,866.1-73.134Z" transform="translate(-850.885 108.864)" stroke="#0c85c0" stroke-miterlimit="2" stroke-width="0" fill="url(#linear-gradient)"/>
+                              <path id="path187826" d="M963.656-83.825a15.461,15.461,0,0,0-15.215,15.671A15.447,15.447,0,0,0,963.656-52.54a15.447,15.447,0,0,0,15.215-15.614A15.46,15.46,0,0,0,963.656-83.825Zm0,26.555a10.731,10.731,0,0,1-10.485-10.884A10.745,10.745,0,0,1,963.656-79.1a10.708,10.708,0,0,1,10.485,10.941A10.694,10.694,0,0,1,963.656-57.27Z" transform="translate(-909.601 93)" stroke="#128ec5" stroke-miterlimit="2" stroke-width="0" fill="url(#linear-gradient)"/>
+                              <path id="path187828" d="M1059.329-72.994a7.511,7.511,0,0,1-5.7-7.408V-94.478h5.186a2.043,2.043,0,0,0,2.052-2.051,2.092,2.092,0,0,0-2.052-2.108h-5.186V-106.5a2.043,2.043,0,0,0-2.051-2.051h-.627a2.043,2.043,0,0,0-2.051,2.051v26.1a12.154,12.154,0,0,0,9.517,12.024,2.02,2.02,0,0,0,2.45-1.994V-71a2.07,2.07,0,0,0-1.539-1.994Z" transform="translate(-971.22 108.667)" stroke="#1898c9" stroke-miterlimit="2" stroke-width="0" fill="url(#linear-gradient)"/>
+                              <path id="path187830" d="M1105.975-71.4c-3.761-1.368-6.041-2.393-6.041-4.274,0-2.279,3.021-3.419,4.673-3.419a4.674,4.674,0,0,1,4.444,2.45,2.408,2.408,0,0,0,3.135,1.254,2.336,2.336,0,0,0,1.2-3.134,9.292,9.292,0,0,0-8.776-5.3c-3.932,0-9.4,2.849-9.4,8.149s5.072,7.18,9.118,8.719c4.388,1.653,6.439,2.621,6.439,4.844,0,1.824-1.254,4.844-5.984,4.844a5.748,5.748,0,0,1-5.528-3.875,2.344,2.344,0,0,0-3.077-1.254,2.351,2.351,0,0,0-1.311,3.077,10.355,10.355,0,0,0,9.915,6.781c7.066,0,10.713-4.787,10.713-9.574,0-5.7-5.243-7.693-9.516-9.289Z" transform="translate(-996.482 93)" stroke="#1ea1ce" stroke-miterlimit="2" stroke-width="0" fill="url(#linear-gradient)"/>
+                              <path id="path187832" d="M1169.056-102.368a3.284,3.284,0,0,0,3.248-3.248,3.284,3.284,0,0,0-3.248-3.248,3.284,3.284,0,0,0-3.248,3.248A3.284,3.284,0,0,0,1169.056-102.368Zm0,3.875a2.311,2.311,0,0,0-2.337,2.336v24.846a2.347,2.347,0,0,0,2.337,2.336,2.347,2.347,0,0,0,2.336-2.336V-96.156A2.311,2.311,0,0,0,1169.056-98.493Z" transform="translate(-1038.295 108.864)" stroke="#24abd3" stroke-miterlimit="2" stroke-width="0" fill="url(#linear-gradient)"/>
+                              <path id="path187834" d="M1221.257-81.99a2.383,2.383,0,0,0-3.134,1.2l-9.061,21.085L1200-80.794a2.4,2.4,0,0,0-3.134-1.2,2.344,2.344,0,0,0-1.254,3.077l11.283,26.1a2.314,2.314,0,0,0,2.166,1.425,2.436,2.436,0,0,0,2.166-1.425l11.226-26.1a2.319,2.319,0,0,0-1.2-3.077Z" transform="translate(-1052.889 91.963)" stroke="#2ab4d8" stroke-miterlimit="2" stroke-width="0" fill="url(#linear-gradient)"/>
+                              <path id="path187836" d="M1310.263-68.154a15.461,15.461,0,0,0-15.215-15.671,15.461,15.461,0,0,0-15.215,15.671,15.447,15.447,0,0,0,15.215,15.614,14.869,14.869,0,0,0,10.485-4.331v1.425a2.4,2.4,0,0,0,2.394,2.336,2.347,2.347,0,0,0,2.336-2.336ZM1295.047-57.27a10.731,10.731,0,0,1-10.485-10.884A10.745,10.745,0,0,1,1295.047-79.1a10.708,10.708,0,0,1,10.485,10.941A10.694,10.694,0,0,1,1295.047-57.27Z" transform="translate(-1101.387 93)" stroke="#30bedd" stroke-miterlimit="2" stroke-width="0" fill="url(#linear-gradient)"/>
+                              </g>
+                          </g>
+                          <g id="icon" transform="translate(-9.867 921.587)">
+                              <path id="Path_1" data-name="Path 1" d="M26.058.919C40.742.919,53.176,9.23,53.176,19.77s-11.9,19.085-26.588,19.085c-9.163,0-17.243-3.327-22.063-8.431A15.5,15.5,0,0,1,0,19.77C0,9.23,11.373.919,26.058.919Z" transform="translate(0 -0.919)" fill="url(#linear-gradient)"/>
+                              <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="8" cy="7.5" rx="8" ry="7.5" transform="translate(6.48 12.499)" fill="#111"/>
+                              <rect id="Rectangle_2" data-name="Rectangle 2" width="16" height="4" transform="translate(18.48 17.499)" fill="#111"/>
+                              <circle id="Ellipse_2" data-name="Ellipse 2" cx="7.5" cy="7.5" r="7.5" transform="translate(31.48 12.499)" fill="#111"/>
+                          </g>
+                          </g>
+                      </svg>
+                      <div>
+                          <h1 class="header enter-2">Build Discord, Twitter And Reddit Bots With <span class="highlight"> 0 Lines Of Code</span></h1>
+              
+                          <h2 class="sub-head enter-3">Generate The Code Of Highly Functional And Customisable Discord, Twitter And 
+                              Reddit Bots By Just A Click Of Few Buttons Absolutely Free With A Easy To Use 
+                              Interactive Dashboard.
+                          </h2>
+                          
+                          <button button class="button signup enter-4  button-start" type="button" @click="$emit('change-page', 'next')">
+                              SIGNUP FOR UPDATES
+                          </button>
+                      </div>
+              
+                  </section>
+            </div>
+        </div>
     </script>
-  </body>
+    <script id="next" type="text/x-template">
+        <div class="next">
+            <div class="inner">
+              <div class="center">
+                <div class="form">
+                <h1 class = "form-head enter-1">
+                Signup For Weekly Updates 
+                </h1>
+                <form id = "detail-form">
+                  <input type="text" class = "enter-2" id = "name" placeholder="Enter Your Name">
+                  <br>
+                  <input type="email" class = "enter-3" id = "email" placeholder="Enter Your Email Address">
+                  <br>
+                  <input type="checkbox" class = "enter-4" id = "check" checked="checked"> <span class="container enter-4">GET NOTIFIED WHEN THE BETA RELEASE IS AVAILABLE</span>        
+                  <br>
+                </form>
+                <button type="button" id = "btn" class = "enter-4" @click = "$emit('change-page', 'start')" onclick = "submitForm()" >Signup</button>
+              </div>       
+            </div>
+              <div class="button-wrapper enter-1">
+                <button class="button button-next" type="button" @click="$emit('change-page', 'start')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="92" height="91" viewBox="0 0 92 91">
+                    <g id="Group_3" data-name="Group 3" transform="translate(-87 -78)">
+                      <g id="Ellipse_6" data-name="Ellipse 6" transform="translate(87 78)" fill="none" stroke="#fff" stroke-width="3">
+                        <ellipse cx="46" cy="45.5" rx="46" ry="45.5" stroke="none"/>
+                        <ellipse cx="46" cy="45.5" rx="44.5" ry="44" fill="none"/>
+                      </g>
+                      <line id="Line_1" data-name="Line 1" x2="45.228" transform="translate(110.649 124.432)" fill="none" stroke="#fff" stroke-width="3"/>
+                      <path id="Path_2" data-name="Path 2" d="M14.668,0,0,14.668" transform="translate(110.649 109.764)" fill="none" stroke="#fff" stroke-width="3"/>
+                      <line id="Line_3" data-name="Line 3" x1="14.668" y1="14.668" transform="translate(110.649 124.432)" fill="none" stroke="#fff" stroke-width="3"/>
+                      <path id="Path_3" data-name="Path 3" d="M7123.832,15.019v2.735l14.392,14.1,2.205-2.3-13.52-13.039,13.52-13.71L7137.551.314l-.792.849Z" transform="translate(-7014 108)" fill="none" stroke="#fff" stroke-width="1"/>
+                      <circle id="Ellipse_7" data-name="Ellipse 7" cx="0.5" cy="0.5" r="0.5" transform="translate(110 124)" fill="#fff"/>
+                      <rect id="Rectangle_7" data-name="Rectangle 7" width="9" height="2" transform="translate(117.171 114.414) rotate(-45)" fill="#fff"/>
+                    </g>
+                  </svg>
+                  
+                </button>
+              </div>
+            </div>
+        </div>
+    </script>
+
+   <script>
+
+      Vue.config.productionTip = false
+
+      Vue.component('start', {
+        template: '#start'
+      })
+
+      Vue.component('next', {
+        template: '#next'
+      })
+
+      new Vue({
+        el: '#app',
+        
+        data: {
+          page: 'start'
+        },
+        
+        methods: {
+          onChangePage(to) {
+            this.page = to
+          }
+        }
+      })
+
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script>
+
+      gsap.from('.header', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6, delay : 0.2 })
+      gsap.from('.sub-head', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6, delay : 0.4})
+      gsap.from('.signup', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6, delay : 0.6 })
+      gsap.from('.logo', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6 })
+
+      var firebaseConfig = {
+        apiKey: "AIzaSyDtIcG5asLHfooNsztgcu-Gw6obsWuhtjc",
+        authDomain: "botsiva-9c1bb.firebaseapp.com",
+        databaseURL: "https://botsiva-9c1bb-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "botsiva-9c1bb",
+        storageBucket: "botsiva-9c1bb.appspot.com",
+        messagingSenderId: "997396426096",
+        appId: "1:997396426096:web:20dac655eb20b60970b3b5",
+        measurementId: "G-2YJ8DKQCTS"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      var records = firebase.database().ref("Records");
+
+
+      var submitForm = function () {
+
+        var Name = $("#name").val();
+        var Email = $("#email").val();
+        var Check = document.getElementById("check").checked;
+
+        records.push({
+          "Name": Name,
+          "Email": Email,
+          "Check": Check
+        });
+      };
+
+    </script>
+</body>
 </html>

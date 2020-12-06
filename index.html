@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
@@ -87,21 +87,40 @@
         <div class="next">
             <div class="inner">
               <div class="center">
-                <h1>
-                Signup For Updates 
+                <div class="form">
+                <h1 class = "form-head enter-1">
+                Signup For Weekly Updates 
                 </h1>
-                <form>
-                  <input type="text" placeholder="Enter Your Name">
+                <form id = "detail-form">
+                  <input type="text" class = "enter-2" id = "name" placeholder="Enter Your Name">
                   <br>
-                  <input type="email" placeholder="Enter Your Email Address">
+                  <input type="email" class = "enter-3" id = "email" placeholder="Enter Your Email Address">
                   <br>
-                  <input type="checkbox" > GET NOTIFIED WHEN THE BETA RELEASE IS AVAILABLE
+                  <input type="checkbox" class = "enter-4" id = "check" checked="checked"> <span class="container enter-4">GET NOTIFIED WHEN THE BETA RELEASE IS AVAILABLE</span>        
                   <br>
-                  <input type="submit" value="SIGNUP">
                 </form>
+                <button type="button" id = "btn" class = "enter-4" @click = "$emit('change-page', 'start')" onclick = "submitForm()" >Signup</button>
+              </div>       
+            </div>
+              <div class="button-wrapper enter-1">
+                <button class="button button-next" type="button" @click="$emit('change-page', 'start')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="92" height="91" viewBox="0 0 92 91">
+                    <g id="Group_3" data-name="Group 3" transform="translate(-87 -78)">
+                      <g id="Ellipse_6" data-name="Ellipse 6" transform="translate(87 78)" fill="none" stroke="#fff" stroke-width="3">
+                        <ellipse cx="46" cy="45.5" rx="46" ry="45.5" stroke="none"/>
+                        <ellipse cx="46" cy="45.5" rx="44.5" ry="44" fill="none"/>
+                      </g>
+                      <line id="Line_1" data-name="Line 1" x2="45.228" transform="translate(110.649 124.432)" fill="none" stroke="#fff" stroke-width="3"/>
+                      <path id="Path_2" data-name="Path 2" d="M14.668,0,0,14.668" transform="translate(110.649 109.764)" fill="none" stroke="#fff" stroke-width="3"/>
+                      <line id="Line_3" data-name="Line 3" x1="14.668" y1="14.668" transform="translate(110.649 124.432)" fill="none" stroke="#fff" stroke-width="3"/>
+                      <path id="Path_3" data-name="Path 3" d="M7123.832,15.019v2.735l14.392,14.1,2.205-2.3-13.52-13.039,13.52-13.71L7137.551.314l-.792.849Z" transform="translate(-7014 108)" fill="none" stroke="#fff" stroke-width="1"/>
+                      <circle id="Ellipse_7" data-name="Ellipse 7" cx="0.5" cy="0.5" r="0.5" transform="translate(110 124)" fill="#fff"/>
+                      <rect id="Rectangle_7" data-name="Rectangle 7" width="9" height="2" transform="translate(117.171 114.414) rotate(-45)" fill="#fff"/>
+                    </g>
+                  </svg>
+                  
+                </button>
               </div>
-              
-              <div class="button-wrapper enter-5"><button class="button button-next" type="button" @click="$emit('change-page', 'start')"><span class="button-text">Back</span></button></div>
             </div>
         </div>
     </script>
@@ -133,29 +152,46 @@
       })
 
     </script>
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <script>
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+      gsap.from('.header', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6, delay : 0.2 })
+      gsap.from('.sub-head', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6, delay : 0.4})
+      gsap.from('.signup', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6, delay : 0.6 })
+      gsap.from('.logo', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6 })
+
       var firebaseConfig = {
         apiKey: "AIzaSyDtIcG5asLHfooNsztgcu-Gw6obsWuhtjc",
         authDomain: "botsiva-9c1bb.firebaseapp.com",
+        databaseURL: "https://botsiva-9c1bb-default-rtdb.europe-west1.firebasedatabase.app",
         projectId: "botsiva-9c1bb",
         storageBucket: "botsiva-9c1bb.appspot.com",
         messagingSenderId: "997396426096",
         appId: "1:997396426096:web:20dac655eb20b60970b3b5",
         measurementId: "G-2YJ8DKQCTS"
       };
-      // Initialize Firebase
+
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
+      var records = firebase.database().ref("Records");
+
+
+      var submitForm = function () {
+
+        var Name = $("#name").val();
+        var Email = $("#email").val();
+        var Check = document.getElementById("check").checked;
+
+        records.push({
+          "Name": Name,
+          "Email": Email,
+          "Check": Check
+        });
+      };
+
     </script>
 </body>
 </html>
