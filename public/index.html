@@ -9,6 +9,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js"></script>
+    <script src="/realtime-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -70,7 +75,7 @@
                       <div>
                           <h1 class="header enter-2">Build Discord, Twitter And Reddit Bots With <span class="highlight"> 0 Lines Of Code</span></h1>
               
-                          <h2 class="sub-head enter-3">Generate The Code Of Highly Functional And Customisable Discord, Twitter And 
+                          <h2 class="sub-head enter-3">A No-Code Tool To Generate The Code Of Highly Functional And Customisable Discord, Twitter And 
                               Reddit Bots By Just A Click Of Few Buttons Absolutely Free With A Easy To Use 
                               Interactive Dashboard.
                           </h2>
@@ -92,7 +97,7 @@
             <div class="inner">
               <div class="center">
                 <div class="form">
-                <h1 class = "form-head enter-1">
+                <h1 id = "head" class = "form-head enter-1">
                 Join The Waitlist 
                 </h1>
                 <form id = "detail-form">
@@ -100,10 +105,10 @@
                   <br>
                   <input type="email" class = "enter-3" id = "email" placeholder="Enter Your Email Address">
                   <br>
-                  <input type="checkbox" class = "enter-4" id = "check" checked="checked"> <span class="container enter-4">GET A WEEKLY PROGRESS UPDATE EVERY SATURDAY (we promise not to spam)</span>        
+                  <input type="checkbox" class = "enter-4" id = "check" checked="checked"> <span id = "txt" class="container enter-4">GET A WEEKLY PROGRESS UPDATE EVERY SATURDAY (we promise not to spam)</span>        
                   <br>
                 </form>
-                <button type="button" id = "btn" class = "enter-4" @click = "$emit('change-page', 'start')" onclick = "submitForm()" >JOIN</button>
+                <button type="button" id = "btn" class = "enter-4" onclick = "submitForm()" >JOIN</button>
               </div>       
             </div>
               <div class="button-wrapper enter-1">
@@ -157,11 +162,10 @@
       })
 
     </script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+
     <script>
+      
+      
 
       gsap.from('.header', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6, delay : 0.2 })
       gsap.from('.sub-head', {duration : 1, opactiy : 0, x : -1200 , stagger : 0.6, delay : 0.4})
@@ -186,7 +190,12 @@
 
 
       var submitForm = function () {
-
+        document.getElementById('head').innerHTML = "Thank You For Joining, You Can Expect A Mail From Us Soon!!"
+        document.getElementById('name').style.display =  "none"
+        document.getElementById('email').style.display =  "none"
+        document.getElementById('check').style.display =  "none"
+        document.getElementById('btn').style.display =  "none"
+        document.getElementById('txt').style.display =  "none"
         var Name = $("#name").val();
         var Email = $("#email").val();
         var Check = document.getElementById("check").checked;
@@ -196,6 +205,7 @@
           "Email": Email,
           "Check": Check
         });
+
       };
 
     </script>
